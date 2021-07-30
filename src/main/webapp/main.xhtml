@@ -1,0 +1,64 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+
+        <p:growl globalOnly="true" life="5000">
+            <p:autoUpdate />
+        </p:growl>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+
+                <h:form id="f1">
+
+                    <h2>Main Page</h2>
+
+                    <p:outputLabel value="Select documents:" />
+
+                    <br/>
+
+                    <div style="margin: 20px 0; display: inline-block; width: 45%;">
+                        <p:outputLabel value="Using R1 implementation" />
+                        <br/>
+                        <p:repeat value="#{appDaoBean.modelStore}" var="rowData" varStatus="rowStatus">
+                            <p:link outcome="/modelR1.xhtml" value="#{rowStatus.index+1}) ModelID: #{rowData.id}" style="font-size: 12px;">
+                                <f:param name="id" value="#{rowData.id}"/>
+                            </p:link>
+                            <br/>
+                        </p:repeat>
+                    </div>
+
+                    <div style="margin: 20px 0; display: inline-block; width: 45%;">
+                        <p:outputLabel value="Using R2 implementation" />
+                        <br/>
+                        <p:repeat value="#{appDaoBean.modelStore}" var="rowData" varStatus="rowStatus">
+                            <p:link outcome="/modelR2.xhtml" value="#{rowStatus.index+1}) ModelID: #{rowData.id}" style="font-size: 12px;">
+                                <f:param name="id" value="#{rowData.id}"/>
+                            </p:link>
+                            <br/>
+                        </p:repeat>
+                    </div>                    
+
+                    <br/>
+
+                    <p:outputLabel value="Total: #{appDaoBean.modelStore.size()}" />
+
+                    <br/>
+                    <br/>
+
+                    <p:commandButton value="Generate data" action="#{appDaoBean.generateModels()}" process="@this" update="@form" />
+
+                </h:form>
+
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

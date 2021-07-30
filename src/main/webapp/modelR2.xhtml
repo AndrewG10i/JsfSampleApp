@@ -1,0 +1,45 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="id" value="#{modelViewBean.id}" />
+            <f:viewAction action="#{modelViewBean.initModelR2}" />
+        </f:metadata>
+    </ui:define>    
+
+    <ui:define name="content">
+
+        <p:growl globalOnly="true" life="5000">
+            <p:autoUpdate />
+        </p:growl>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+
+                <h:form id="f1">
+
+                    <p:outputLabel value="Bean created at: #{modelViewBean.beanCreateTime}" />
+
+                    <br/>
+
+                    <p:outputLabel value="Model ID: #{modelViewBean.model.id}" />
+
+                    <br/>
+                    <br/>
+
+                    <p:commandButton value="Delete" action="#{modelViewBean.deleteR2()}" process="@this" update="@form" />
+
+                </h:form>
+
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
